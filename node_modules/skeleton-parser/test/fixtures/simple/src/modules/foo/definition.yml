@@ -1,0 +1,6 @@
+data:
+  arg1: 'ads'
+  arg2: 'asd'
+options:
+  opt1: ['op1-defaul', 'op1-other']
+  opt2: ['op2-defaul', 'op2-other']
