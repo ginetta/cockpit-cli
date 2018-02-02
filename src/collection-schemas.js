@@ -1,4 +1,3 @@
-const CockpitSDK = require('cockpit-sdk').default;
 const cockpit = require('./index');
 
 const fs = require('fs');
