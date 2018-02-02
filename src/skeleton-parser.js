@@ -1,5 +1,5 @@
-import execa from "execa";
-import skeletonParser from "skeleton-parser";
+const execa = require("execa");
+const skeletonParser = require("skeleton-parser");
 
 const listSkeletonGroups = skeleton => {
   const groups = new Set();
@@ -69,7 +69,7 @@ async function get() {
   );
   return skeleton;
 }
-export default {
+module.exports = {
   get,
   listSkeletonGroups,
   copyGroupDataToClipboard,

@@ -1,6 +1,6 @@
-import CockpitSDK from "cockpit-sdk";
-import config from "./config.tpl";
+const CockpitSDK = require('cockpit-sdk').default;
+const config = require('./config');
 
 const cockpit = new CockpitSDK(config);
 
-export default cockpit;
+module.exports = cockpit;

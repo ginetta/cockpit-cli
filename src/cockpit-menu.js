@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import path from "path";
-import fs from "fs";
-import { terminal } from "terminal-kit";
-import execa from "execa";
-import skeletonParser from "./skeleton-parser";
-import cockpitSchema from "./collection-schemas";
+const path = require("path");
+const fs = require("fs");
+const terminal = require("terminal-kit").terminal;
+const execa = require("execa");
+const skeletonParser = require("./skeleton-parser");
+const cockpitSchema = require("./collection-schemas");
 
 const terminalMenu = () => {
   terminal.cyan("\nSelect: ");
@@ -150,6 +150,11 @@ const terminalMenu = () => {
                     terminal.cyan.yellow(`File created at:\n${filePath}\n`);
                     terminal.eraseDisplayBelow();
                     terminal.eraseLineAfter();
+                    execa.shell(
+                      "echo '" +
+                        JSON.stringify(skeleton, null, "  ") +
+                        "'| pbcopy"
+                    );
                     return terminalMenu();
                   }
                 );
@@ -181,4 +186,4 @@ const terminalMenu = () => {
   }
 };
 
-terminalMenu();
+module.exports = terminalMenu;

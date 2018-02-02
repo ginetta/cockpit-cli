@@ -1,72 +1,50 @@
-import CockpitSDK from "cockpit-sdk";
-import cockpit from "./index";
+const CockpitSDK = require('cockpit-sdk').default;
+const cockpit = require('./index');
 
-import fs from "fs";
+const fs = require('fs');
 
-const listCollections = () => {
-  return cockpit.collectionList();
-};
+const listCollections = () => cockpit.collectionList();
 
-const getAllCollectionsSchemas = () => {
-  return cockpit.collectionList().then(collections =>
+const getAllCollectionsSchemas = () =>
+  cockpit.collectionList().then(collections =>
     collections.map(c =>
       cockpit.collectionSchema(c).then(data =>
-        fs.writeFile(
-          `./cockpit/schemas/${c}.json`,
-          JSON.stringify(data, null, "  "),
-          err => {
-            if (err)
-              return fs.mkdir("./cockpit/schemas", err => {
-                if (err) throw err;
+        fs.writeFile(`./cockpit/schemas/${c}.json`, JSON.stringify(data, null, '  '), (err) => {
+          if (err) {
+            return fs.mkdir('./cockpit/schemas', (err) => {
+              if (err) throw err;
 
-                return fs.writeFile(
-                  `./cockpit/schemas/${c}.json`,
-                  JSON.stringify(data, null, "  "),
-                  err => {
-                    if (err) throw err;
-
-                    return;
-                  }
-                );
-              });
-
-            return;
+              return fs.writeFile(
+                `./cockpit/schemas/${c}.json`,
+                JSON.stringify(data, null, '  '),
+                (err) => {
+                  if (err) throw err;
+                },
+              );
+            });
           }
-        )
-      )
-    )
-  );
-};
+        }))));
 
-const getCollectionSchema = collection => {
-  return cockpit.collectionSchema(collection).then(data => {
-    return fs.writeFile(
-      `./cockpit/schemas/${collection}.json`,
-      JSON.stringify(data, null, "  "),
-      err => {
-        if (err)
-          return fs.mkdir("./cockpit/schemas", err => {
-            if (err) throw err;
+const getCollectionSchema = collection =>
+  cockpit.collectionSchema(collection).then(data =>
+    fs.writeFile(`./cockpit/schemas/${collection}.json`, JSON.stringify(data, null, '  '), (err) => {
+      if (err) {
+        return fs.mkdir('./cockpit/schemas', (err) => {
+          if (err) throw err;
 
-            return fs.writeFile(
-              `./cockpit/schemas/${collection}.json`,
-              JSON.stringify(data, null, "  "),
-              err => {
-                if (err) throw err;
-
-                return;
-              }
-            );
-          });
-
-        return;
+          return fs.writeFile(
+            `./cockpit/schemas/${collection}.json`,
+            JSON.stringify(data, null, '  '),
+            (err) => {
+              if (err) throw err;
+            },
+          );
+        });
       }
-    );
-  });
-};
+    }));
 
-export default {
+module.exports = {
   getAllCollectionsSchemas,
   listCollections,
-  getCollectionSchema
+  getCollectionSchema,
 };
