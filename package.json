@@ -2,7 +2,6 @@
   "name": "cockpit-cli",
   "version": "0.0.1",
   "description": "Parse data for cockpit using terminal options ",
-  "main": "./dist/src/index.js",
   "bin": "./src/cli.js",
   "scripts": {
     "test": "eslint .",
@@ -12,13 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/RafaelaMG/cockpit-cli.git"
   },
-  "keywords": [
-    "cokpit",
-    "headless",
-    "cms",
-    "skd",
-    "cli"
-  ],
+  "keywords": ["cokpit", "headless", "cms", "skd", "cli"],
   "author": "Rafaela Guerra",
   "license": "MIT",
   "bugs": {
