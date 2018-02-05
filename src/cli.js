@@ -16,11 +16,12 @@ Usage
 Options
   --init, -i  Creates default folders & config template;
   --components, -c  Saves components.json and copies components data to clipboard;
-  --menu, -c  Displays cli menu;
+  --menu, -c  Displays CLI menu;
 
 Examples
   $ cockpit-cli --init
-  $ cockpit-cli -g
+  $ cockpit-cli -c
+  $ cockpit-cli -m
 `,
   {
     flags: {
@@ -46,3 +47,4 @@ Examples
 if (cli.flags.init) cockpitInit();
 if (cli.flags.components) cockpitComponents();
 if (cli.flags.menu) cockpitMenu();
+if (!cli.flags.init && !cli.flags.components && !cli.flags.menu) cockpitMenu();

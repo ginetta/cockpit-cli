@@ -3,7 +3,7 @@
 const fs = require('fs');
 
 const config =
-  "module.exports = { host: '<HOST>', webSocket: '<WEBSOCKET>', accessToken: '<ACCESS_TOKEN>'};";
+  "module.exports = {\n  host: '<HOST>',\n  webSocket: '<WEBSOCKET>',\n  accessToken: '<ACCESS_TOKEN>'\n};";
 
 const cockpitConfig = () => {
   if (fs.existsSync('./cockpit')) {

@@ -167,17 +167,15 @@ const terminalMenu = () => {
 };
 
 const saveComponents = () => {
-  skeletonParser
-    .get()
-    .then((skeleton) => {
-      const filePath = './cockpit/components.json';
-      fs.writeFile(filePath, JSON.stringify(skeleton, null, ' '), (err) => {
-        if (err) throw err;
+  const filePath = './cockpit/components.json';
+  skeletonParser.get().then(skeleton =>
+    fs.writeFile(filePath, JSON.stringify(skeleton, null, ' '), (saveErr) => {
+      if (saveErr) throw saveErr;
 
-        return execa.shell(`echo '${JSON.stringify(skeleton, null, '  ')}'| pbcopy`);
-      });
-    })
-    .then(() => process.exit());
+      return execa
+        .shell(`echo '${JSON.stringify(skeleton, null, '  ')}'| pbcopy`)
+        .then(() => process.exit());
+    }));
 };
 
 module.exports = { terminalMenu, saveComponents };
