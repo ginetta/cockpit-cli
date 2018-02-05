@@ -8,7 +8,6 @@ let cockpit = null;
 if (fs.existsSync('./cockpit/config.js')) {
   const config = require(configPath);
 
-  console.log(JSON.stringify(config, null, ' '));
   cockpit = new CockpitSDK(config);
 }
 
