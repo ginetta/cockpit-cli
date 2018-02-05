@@ -6,7 +6,6 @@ const path = require('path');
 const configCopyPath = path.resolve(__dirname, './config.tpl.js');
 
 const configContent = fs.readFileSync(configCopyPath, 'utf8');
-console.log(configContent);
 
 const cockpitConfig = () => {
   if (fs.existsSync('./cockpit')) {
