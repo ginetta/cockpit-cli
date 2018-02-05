@@ -172,9 +172,10 @@ const saveComponents = () => {
     fs.writeFile(filePath, JSON.stringify(skeleton, null, ' '), (saveErr) => {
       if (saveErr) throw saveErr;
 
-      return execa
-        .shell(`echo '${JSON.stringify(skeleton, null, '  ')}'| pbcopy`)
-        .then(() => process.exit());
+      return execa.shell(`echo '${JSON.stringify(skeleton, null, '  ')}'| pbcopy`).then(() => {
+        term.cyan.yellow(`File created at:\n${filePath}\n`);
+        process.exit();
+      });
     }));
 };
 
