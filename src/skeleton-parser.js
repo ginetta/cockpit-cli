@@ -1,5 +1,6 @@
 const execa = require('execa');
 const skeletonParser = require('skeleton-parser');
+const fs = require('fs');
 
 const listSkeletonGroups = (skeleton) => {
   const groups = new Set();
@@ -30,12 +31,24 @@ const selectSkeletonGroup = (skeleton) => {
 };
 
 async function get() {
-  const metaData = await skeletonParser({
-    cwd: '.',
-    src: '.',
-    folders: ['components', 'layouts', 'materials', 'elements', 'meta', 'pages', 'scripts'],
-    yml: false, // Parses .js files instead of .yml
-  });
+  let metaData;
+  if (fs.existsSync('./src')) {
+    metaData = await skeletonParser({
+      cwd: '.',
+      src: 'src',
+      folders: ['components', 'layouts', 'materials', 'elements', 'meta', 'pages', 'scripts'],
+      yml: false, // Parses .js files instead of .yml
+    });
+  }
+
+  if (!fs.existsSync('./src')) {
+    metaData = await skeletonParser({
+      cwd: '.',
+      src: '.',
+      folders: ['components', 'layouts', 'materials', 'elements', 'meta', 'pages', 'scripts'],
+      yml: false, // Parses .js files instead of .yml
+    });
+  }
   const skeleton = {};
   const folders = Object.keys(metaData);
   const subFolders = folders.map(containedElement => Object.keys(metaData[containedElement]));
