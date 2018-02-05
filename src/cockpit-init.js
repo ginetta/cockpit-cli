@@ -1,15 +1,13 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const path = require('path');
 
-const configCopyPath = path.resolve(__dirname, './config.tpl.js');
-
-const configContent = fs.readFileSync(configCopyPath, 'utf8');
+const config =
+  "module.exports = { host: '<HOST>', webSocket: '<WEBSOCKET>', accessToken: '<ACCESS_TOKEN>'};";
 
 const cockpitConfig = () => {
   if (fs.existsSync('./cockpit')) {
-    return fs.writeFile('./cockpit/config.js', configContent, (wrErr) => {
+    return fs.writeFile('./cockpit/config.js', config, (wrErr) => {
       if (wrErr) throw wrErr;
 
       process.exit();
@@ -18,7 +16,7 @@ const cockpitConfig = () => {
 
   return fs.mkdir('./cockpit', (mkErr) => {
     if (mkErr) throw mkErr;
-    return fs.writeFile('./cockpit/config.js', configContent, (mkWrErr) => {
+    return fs.writeFile('./cockpit/config.js', config, (mkWrErr) => {
       if (mkWrErr) throw mkWrErr;
 
       process.exit();
