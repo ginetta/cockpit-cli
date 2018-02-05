@@ -7,18 +7,23 @@ const configCopyPath = path.resolve(__dirname, './config.js');
 
 const configContent = fs.readFileSync(configCopyPath, 'utf8');
 
-const cocpkpitInit = () => {
-  fs.access('./cockpit', (err) => {
-    if (!err) return;
+const cockpitConfig = () => {
+  if (fs.existsSync('./cockpit')) {
+    return fs.writeFile('./cockpit/config.js', configContent, (wrErr) => {
+      if (wrErr) throw wrErr;
 
-    return fs.access('./cockpit/config.js', (err) => {
-      if (!err) return;
+      process.exit();
+    });
+  }
 
-      return fs.mkdir('./cockpit', (err) => {
-        fs.writeFile('./cockpit/config.js', configContent, (err) => {});
-      });
+  return fs.mkdir('./cockpit', (mkErr) => {
+    if (mkErr) throw mkErr;
+
+    return fs.writeFile('./cockpit/config.js', configContent, (mkWrErr) => {
+      if (mkWrErr) throw mkWrErr;
+
+      process.exit();
     });
   });
 };
-
-module.exports = cocpkpitInit;
+module.exports = { cockpitConfig };

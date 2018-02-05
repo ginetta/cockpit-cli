@@ -12,7 +12,13 @@
     "type": "git",
     "url": "git+https://github.com/RafaelaMG/cockpit-cli.git"
   },
-  "keywords": ["cokpit", "headless", "cms", "skd", "cli"],
+  "keywords": [
+    "cokpit",
+    "headless",
+    "cms",
+    "skd",
+    "cli"
+  ],
   "author": "Rafaela Guerra",
   "license": "MIT",
   "bugs": {

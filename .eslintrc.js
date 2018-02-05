@@ -4,5 +4,6 @@ module.exports = {
     'consistent-return': 0,
     'array-callback-return': 0,
     'no-shadow': 0,
+    'no-restricted-syntax': 0,
   },
 };

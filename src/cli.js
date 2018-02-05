@@ -2,22 +2,24 @@
 
 const meow = require('meow');
 
-const cockpitInit = require('./cockpit-init');
+const cockpitInit = require('./cockpit-init').cockpitConfig;
 
-const cockpitMenu = require('./cockpit-menu.js');
+const cockpitComponents = require('./cockpit-menu').saveComponents;
+
+const cockpitMenu = require('./cockpit-menu').terminalMenu;
 
 const cli = meow(
   `
 Usage
-  $ cockpit || cockpit <options>
+  $ cockpit-cli <options>
 
 Options
   --init, -i  Creates default folders & config template
-  --get-components -g  Saves and copies components info to clipboard
+  --components -c  Saves components.json and copies components data to clipboard
 
 Examples
-  $ cockpit --init
-    cockpit --get-components
+  $ cockpit-cli --init
+  $ cockpit-cli -g
 `,
   {
     flags: {
@@ -28,17 +30,18 @@ Examples
       },
       components: {
         type: 'boolean',
-        alias: 'g',
+        alias: 'c',
+        default: false,
+      },
+      menu: {
+        type: 'boolean',
+        alias: 'm',
         default: false,
       },
     },
   },
 );
 
-if (cli.flags.init) {
-  cockpitInit();
-}
-
-if (cli.flags.components) {
-  cockpitMenu();
-}
+if (cli.flags.init) cockpitInit();
+if (cli.flags.components) cockpitComponents();
+if (cli.flags.menu) cockpitMenu();
