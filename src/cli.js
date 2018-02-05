@@ -16,6 +16,7 @@ Usage
 Options
   --init, -i  Creates default folders & config template
   --components -c  Saves components.json and copies components data to clipboard
+  --menu -c Displays cli menu
 
 Examples
   $ cockpit-cli --init
