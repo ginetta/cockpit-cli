@@ -169,7 +169,7 @@ const terminalMenu = () => {
 const saveComponents = () => {
   const filePath = './cockpit/components.json';
   skeletonParser.get().then(skeleton =>
-    fs.writeFile(filePath, JSON.stringify(skeleton, null, ' '), (saveErr) => {
+    fs.writeFile(filePath, JSON.stringify(skeleton, null, '  '), (saveErr) => {
       if (saveErr) throw saveErr;
 
       return execa.shell(`echo '${JSON.stringify(skeleton, null, '  ')}'| pbcopy`).then(() => {
