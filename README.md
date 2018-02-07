@@ -29,6 +29,8 @@ cockpit-cli --init, --menu, --components, --help
 
 When setting up a project run `--init` so that the **CLI** can set up a `/cockpit` folder with a `config.js` file to connect the project to cockpit using [cockpit-sdk](https://github.com/ginetta/cockpit-sdk) .
 
+**Note: `webSockets` addresses are not required, but it is possible to use them.**
+
 ```javascript
 module.exports = {
   host: "<HOST>",
@@ -37,7 +39,7 @@ module.exports = {
 };
 ```
 
-To edit the file at `./cockpit/config.js` :
+To edit the file at `./cockpit/config.js`:
 
 * Go into Cockpit and access a `collection` edit menu where the tab with the description `Other` should be selected.
 
@@ -45,12 +47,12 @@ To edit the file at `./cockpit/config.js` :
 
 * Copy the contents of those fields to the `config.js` file. (Note: webSocket field can be ommited).
 
-* The `accessToken` can be retrieved on Cockpit settings page at `API access`. Choose between `Full access API-key` or a `Custom key` but please bear in mind that a `Custom Key` permission level can be restricted in comparison to a `Full access API-key`.
+* The `accessToken` can be retrieved on Cockpit settings page at `API access`. Choose between `Full access API-key` or a `Custom key` but please bear in mind that a `Custom Key` permission level can be restricted in comparison to a `Full access API-key`.  
   It's possible to edit the `config.js` file at anytime but if in doubt about which one to choose, please checkout [Cockpit API documentation](https://getcockpit.com/documentation/api/token).
 
 ### Structure example
 
-```sh
+```
 └── src
     ├── components
     │       ├── footer
@@ -122,7 +124,47 @@ module.exports = {
 };
 ```
 
-The **CLI** parses the content of this file to `.json` and it can separate them in `groups` by detecting if there is a value assigned to the key `group` in the `component/definition.js` file.  
+The output result from parsing this `component` with the **CLI** is this:
+
+```json
+ "paragraph": {
+    "group": "test",
+    "fields": [
+      {
+        "name": "color",
+        "type": "collectionlink",
+        "options": {
+          "link": "Colors"
+        }
+      },
+      {
+        "name": "text",
+        "type": "textarea",
+        "default": ""
+      },
+      {
+        "name": "container",
+        "type": "select",
+        "options": {
+          "options": [
+            "medium",
+            "small",
+            "spaceless",
+            "left-aligned"
+          ]
+        },
+        "default": ""
+      },
+      {
+        "name": "lead",
+        "type": "boolean",
+        "default": false
+      }
+    ]
+  }
+```
+
+The **CLI** parses the content of the `definition.js` file to `.json` as showed above, and it can separate them in `groups` by detecting if there is a value assigned to the key `group` in the `component/definition.js` file.  
 If no groups are specified then all groups are selected and this means all the `definitions.js` files are going to be parsed and it is possible to generate a `cockpit/components.json` file with all the parsed data or copy that data to the clipboard.
 
 ### Component groups & Collection schemas
@@ -135,9 +177,9 @@ Launches the **CLI** menu where it's possible to:
 
 ![cli-schemas-menu](https://i.imgur.com/nhn2nrX.png)
 
-* `💾 All collections` creates a folder at `/cockpit/schemas` that contains data from all the schemas in all the collectionss in parsed to `.json` format .
+* `💾 All collections` creates a folder at `/cockpit/schemas` that contains data from all the schemas in all the collections in parsed to `.json` format .
 
-* `💾 Select a collection` creates a folder at `/cockpit/schemas` that contains data from the scheema of the selected collection.
+* `💾 Select a collection` creates a folder at `/cockpit/schemas` that contains data from the schema of the selected collection.
 
 * The `Save` option always overwrites previous folders or files created by the **CLI**.
 
@@ -160,12 +202,70 @@ The CLI outputs a data structure ready to be added to cockpit `components.js` fi
 
 * Go to Cockpit
 * Access finder
-* Select the config folder
+* Select the `config folder` and inside it the `components.js` file
 
-The parsed structure by the **CLI** can be pasted here, for example, adding the data of a specific `component group` or overwritting the complete file by pasting the data from all `component groups`.
+The parsed structure by the **CLI** can be pasted here, for example, adding the data of a specific `component group` or overwriting the complete file by pasting the data from all `component groups`.
+The parsed data should be pasted in `components.js` as an object:
+
+```javascript
+window.CP_LAYOUT_COMPONENTS = {};
+```
+
+Only the contents of this object should be edited, like this:
+
+```json
+window.CP_LAYOUT_COMPONENTS = {
+  "paragraph": {
+    "group": "test",
+    "fields": [
+      {
+        "name": "color",
+        "type": "collectionlink",
+        "options": {
+          "link": "Colors"
+        }
+      },
+      {
+        "name": "text",
+        "type": "textarea",
+        "default": ""
+      },
+      {
+        "name": "container",
+        "type": "select",
+        "options": {
+          "options": ["medium", "small", "spaceless", "left-aligned"]
+        },
+        "default": ""
+      },
+      {
+        "name": "lead",
+        "type": "boolean",
+        "default": false
+      }
+    ]
+  }
+}
+```
 
 After the file is saved and when trying to add a new component to a cockpit collection these components that were parsed by the **CLI** should now appear as an option inside their specified `groups`.
 
+#### `config/components.js` does not exist yet
+
+Do not worry, just creat one:
+
+* Go to Cockpit
+* Access finder
+* Select this icon ![create-icon](https://i.imgur.com/Z3wvldN.png)
+* Choose `folder` and name it `config`
+* Go inside `config folder` and click the same icon
+* Choose `file` and name it `components.js`
+* Paste this inside the file:
+
+```javascript
+window.CP_LAYOUT_COMPONENTS = {};
+```
+
 #### $ cockpit-cli --components
 
-This simply acts as a shortcut to create the `/cockpit/components.json/` file and to copy the parsed data to the clipboard.
+This simply acts as a shortcut to create the `/cockpit/components.json` file and to copy the parsed data to the clipboard.
