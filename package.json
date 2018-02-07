@@ -1,7 +1,7 @@
 {
   "name": "cockpit-cli",
-  "version": "1.0.0",
-  "description": "Parse data for cockpit using terminal options ",
+  "version": "0.0.1",
+  "description": "A CLI to parse data for Cockpit headless CMS",
   "bin": "./src/cli.js",
   "scripts": {
     "test": "eslint .",
