@@ -1,6 +1,6 @@
 {
   "name": "cockpit-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI to parse data for Cockpit headless CMS",
   "bin": "./src/cli.js",
   "scripts": {
@@ -11,7 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/ginetta/cockpit-cli.git"
   },
-  "keywords": ["cockpit", "headless", "cms", "sdk", "cli"],
+  "keywords": [
+    "cockpit",
+    "headless",
+    "cms",
+    "sdk",
+    "cli"
+  ],
   "author": "Rafaela Guerra",
   "license": "MIT",
   "bugs": {
