@@ -29,12 +29,9 @@ cockpit-cli --init, --menu, --components, --help
 
 When setting up a project run `--init` so that the **CLI** can set up a `/cockpit` folder with a `config.js` file to connect the project to cockpit using [cockpit-sdk](https://github.com/ginetta/cockpit-sdk) .
 
-**Note: `webSockets` addresses are not required, but it is possible to use them.**
-
 ```javascript
 module.exports = {
   host: "<HOST>",
-  webSocket: "<WEBSOCKET>",
   accessToken: "<ACCESS_TOKEN>"
 };
 ```
@@ -43,9 +40,9 @@ To edit the file at `./cockpit/config.js`:
 
 * Go into Cockpit and access a `collection` edit menu where the tab with the description `Other` should be selected.
 
-* Enable the `CONTENT PREVIEW` option. This is where the `host` and `webSocket` are (or should be), specified by this order.
+* Enable the `CONTENT PREVIEW` option. This is where the `host` is (or should be).
 
-* Copy the contents of those fields to the `config.js` file. (Note: webSocket field can be ommited).
+* Copy the contents of those fields to the `config.js` file.
 
 * The `accessToken` can be retrieved on Cockpit settings page at `API access`. Choose between `Full access API-key` or a `Custom key` but please bear in mind that a `Custom Key` permission level can be restricted in comparison to a `Full access API-key`.  
   It's possible to edit the `config.js` file at anytime but if in doubt about which one to choose, please checkout [Cockpit API documentation](https://getcockpit.com/documentation/api/token).

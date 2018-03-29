@@ -9,21 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RafaelaMG/cockpit-cli.git"
+    "url": "git+https://github.com/ginetta/cockpit-cli.git"
   },
-  "keywords": [
-    "cockpit",
-    "headless",
-    "cms",
-    "sdk",
-    "cli"
-  ],
+  "keywords": ["cockpit", "headless", "cms", "sdk", "cli"],
   "author": "Rafaela Guerra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RafaelaMG/cockpit-cli/issues"
+    "url": "https://github.com/ginetta/cockpit-cli/issues"
   },
-  "homepage": "https://github.com/RafaelaMG/cockpit-cli#readme",
+  "homepage": "https://github.com/ginetta/cockpit-cli#readme",
   "dependencies": {
     "cockpit-sdk": "^0.9.2",
     "execa": "^0.9.0",
